@@ -35,3 +35,10 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# IntelliJ IDEA files
+.idea/
+
+# Gradle specific files
+.gradle/
+build/
