@@ -2,6 +2,7 @@ package com.moriah.registrationMember.member.controller;
 
 import com.moriah.registrationMember.member.dto.MemberDTO;
 import com.moriah.registrationMember.member.service.MemberService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,8 +38,6 @@ public class MemberController {
     @PostMapping("/member/save")
     public String save(@ModelAttribute MemberDTO memberDTO) {
 
-
-
         System.out.println("MemberController.save"); //soutm
         System.out.println("memberDTO = " + memberDTO);
         //memberDTO = MemberDTO(id=null, memberEmail=aaa2, memberPassword=aaaa, memberName=aaaa2)
@@ -47,7 +46,30 @@ public class MemberController {
 //        MemberService memberService = new MemberService();
         memberService.save(memberDTO);
 
-        return "index";
+        return "login";
     }
 
+    @GetMapping("/member/login")
+    public String loginForm() {
+        return "login";
+    }
+
+    @PostMapping("/member/login")
+    public String login(@ModelAttribute MemberDTO memberDTO, HttpSession session) {
+
+        System.out.println("MemberController.login");
+        System.out.println("memberDTO = " + memberDTO);
+
+        MemberDTO loginResult = memberService.login(memberDTO);
+
+        if (loginResult != null){
+            //login 성공
+            session.setAttribute("loginEmail", loginResult.getMemberEmail()); // 세션정보에 담아줌
+            return "main";
+        }else {
+            //login 실패
+            return "login";
+        }
+
+    }
 }
