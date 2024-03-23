@@ -5,10 +5,13 @@ import com.moriah.registrationMember.member.service.MemberService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -72,4 +75,14 @@ public class MemberController {
         }
 
     }
+
+    @GetMapping("/member/")
+    public String findAll(Model model){
+        //Model -> 스프링에서 실어 나뤄주는 역할(리스트를)
+        List<MemberDTO> memberDTOList = memberService.findAll();
+        //어떠한 html로 가져갈 데이터가 있다면 model 사용 (기본적인 사용방식, 이외에 다양한 방식 있음)
+        model.addAttribute("memberList", memberDTOList);
+        return "list";
+    }
+
 }

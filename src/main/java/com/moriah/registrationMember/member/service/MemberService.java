@@ -6,6 +6,8 @@ import com.moriah.registrationMember.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -54,5 +56,20 @@ public class MemberService {
             return null;
         }
 
+    }
+
+    public List<MemberDTO> findAll() {
+        List<MemberEntity> memberEntityList = memberRepository.findAll();
+        List<MemberDTO> memberDTOList = new ArrayList<>();
+        //리스트에서 리스트로 for 문 사용
+        //for each
+        for (MemberEntity memberEntity: memberEntityList){
+//            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
+//            memberDTOList.add(memberDTO);
+            // 위 두줄 아래 한줄로 간단히 작성
+            memberDTOList.add(MemberDTO.toMemberDTO(memberEntity));
+        }
+        return memberDTOList;
+        // entity 객체 dto 객체로 변환
     }
 }
