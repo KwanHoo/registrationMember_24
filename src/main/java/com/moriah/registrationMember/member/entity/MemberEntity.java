@@ -1,5 +1,6 @@
 package com.moriah.registrationMember.member.entity;
 
+import com.moriah.registrationMember.member.dto.MemberDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,5 +21,14 @@ public class MemberEntity {
     private String memberPassword;
 
     private String memberName;
+
+    public static MemberEntity toMemberEntity(MemberDTO memberDTO){
+        // static 매서드로 정의
+        MemberEntity memeberEntity = new MemberEntity();
+        memeberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memeberEntity.setMemberName(memberDTO.getMemberName());
+        memeberEntity.setMemberPassword(memberDTO.getMemberPassword());
+        return memeberEntity;
+    }
 
 }
