@@ -89,4 +89,20 @@ public class MemberService {
         // id가 있으면 update 쿼리를 날려줌
         memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
     }
+
+    public MemberDTO findById(Long id) {
+        Optional<MemberEntity> optionalMemberEntity = memberRepository.findById(id);
+        if(optionalMemberEntity.isPresent()){
+
+//            MemberEntity memberEntity = optionalMemberEntity.get();
+//            MemberDTO memberDTO = MemberDTO.toMemberDTO(memberEntity);
+//            return memberDTO;
+            // 위 3줄 아래 한줄로 표현 가능
+            return MemberDTO.toMemberDTO(optionalMemberEntity.get());
+        }else {
+            return null;
+        }
+    }
+
+
 }

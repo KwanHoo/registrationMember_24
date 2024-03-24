@@ -6,10 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -84,6 +81,19 @@ public class MemberController {
         model.addAttribute("memberList", memberDTOList);
         return "list";
     }
+
+    @GetMapping("/member/{id}")
+    //    public String findById(@PathVariable("id") Long id, Model model) {
+    public String findById(@PathVariable Long id, Model model){
+        System.out.println("MemberController.findById");
+        System.out.println("id = " + id + ", model = " + model);
+
+        MemberDTO memberDTO = memberService.findById(id); //한명이니깐 DTO 타입으로 받음 위는 여러명이여서  List타입으로 받고
+        model.addAttribute("member", memberDTO);
+        System.out.println("memberDTO = " + memberDTO);
+        return "detail";
+    }
+
 
     @GetMapping("/member/update")
     public String updateForm(HttpSession session, Model model){
