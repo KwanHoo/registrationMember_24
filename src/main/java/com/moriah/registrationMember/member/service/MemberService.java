@@ -72,4 +72,21 @@ public class MemberService {
         return memberDTOList;
         // entity 객체 dto 객체로 변환
     }
+
+    public MemberDTO updateFrom(String myEmail) {
+        Optional<MemberEntity> optionalMemberEmail = memberRepository.findByMemberEmail(myEmail);
+        if(optionalMemberEmail.isPresent()) {
+            return MemberDTO.toMemberDTO(optionalMemberEmail.get());
+        }else {
+            return null;
+        }
+
+    }
+
+    public void update(MemberDTO memberDTO) {
+        //-- save()
+        // id가 없으면 insert 쿼리를 수정해줌
+        // id가 있으면 update 쿼리를 날려줌
+        memberRepository.save(MemberEntity.toUpdateMemberEntity(memberDTO));
+    }
 }

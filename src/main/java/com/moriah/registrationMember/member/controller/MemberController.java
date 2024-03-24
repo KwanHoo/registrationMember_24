@@ -78,11 +78,25 @@ public class MemberController {
 
     @GetMapping("/member/")
     public String findAll(Model model){
-        //Model -> 스프링에서 실어 나뤄주는 역할(리스트를)
+        //Model -> 스프링에서 실어 나르는 역할(리스트를)
         List<MemberDTO> memberDTOList = memberService.findAll();
         //어떠한 html로 가져갈 데이터가 있다면 model 사용 (기본적인 사용방식, 이외에 다양한 방식 있음)
         model.addAttribute("memberList", memberDTOList);
         return "list";
+    }
+
+    @GetMapping("/member/update")
+    public String updateForm(HttpSession session, Model model){
+        String myEmail = (String) session.getAttribute("loginEmail"); // object 타입을 string으로 형변환
+        MemberDTO memberDTO = memberService.updateFrom(myEmail);
+        model.addAttribute("updateMember", memberDTO);
+        return "update";
+    }
+
+    @PostMapping("/member/update")
+    public String update(@ModelAttribute MemberDTO memberDTO) {
+        memberService.update(memberDTO);
+        return "redirect:/member/" + memberDTO.getId(); //리다이렉트해줘서 상세페이지 띄워줌
     }
 
 }

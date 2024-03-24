@@ -31,4 +31,13 @@ public class MemberEntity {
         return memeberEntity;
     }
 
+    public static MemberEntity toUpdateMemberEntity(MemberDTO memberDTO){
+        // static 매서드로 정의
+        MemberEntity memeberEntity = new MemberEntity();
+        memeberEntity.setId(memberDTO.getId());
+        memeberEntity.setMemberEmail(memberDTO.getMemberEmail());
+        memeberEntity.setMemberName(memberDTO.getMemberName());
+        memeberEntity.setMemberPassword(memberDTO.getMemberPassword());
+        return memeberEntity;
+    }
 }
