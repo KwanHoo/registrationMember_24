@@ -109,4 +109,11 @@ public class MemberController {
         return "redirect:/member/" + memberDTO.getId(); //리다이렉트해줘서 상세페이지 띄워줌
     }
 
+    @GetMapping("/member/delete/{id}")
+    public String deleteById(@PathVariable Long id) {
+        memberService.deleteById(id);
+
+        return "redirect:/member/";
+    }
+
 }
