@@ -4,6 +4,9 @@ import com.moriah.registrationMember.ajaxEx.controller.dto.AjaxDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class AjaxController {
     @GetMapping("/ex01")
@@ -52,5 +55,22 @@ public class AjaxController {
         System.out.println("ajaxDto = " + ajaxDto);
 
         return ajaxDto;
+    }
+
+    private List<AjaxDto> DTOList() {
+        List<AjaxDto> dtoList =  new ArrayList<>();
+        dtoList.add(new AjaxDto("data1", "data11"));
+        dtoList.add(new AjaxDto("data2", "data22"));
+        dtoList.add(new AjaxDto("data3", "data33"));
+        dtoList.add(new AjaxDto("data4", "data44"));
+        return dtoList;
+    }
+    @PostMapping("/ex08")
+    public @ResponseBody List<AjaxDto> ex08(@RequestBody AjaxDto ajaxDto){
+        System.out.println("ajaxDto = " + ajaxDto);
+        List<AjaxDto> dtoList = DTOList();
+        dtoList.add(ajaxDto);
+
+        return dtoList;
     }
 }

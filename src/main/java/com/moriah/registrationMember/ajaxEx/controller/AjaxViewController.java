@@ -39,4 +39,8 @@ public class AjaxViewController {
     public String ajaxEx07(){
         return "ajax-ex-07";
     }
+    @GetMapping("/ajax-ex-08")
+    public String ajaxEx08() {
+        return "ajax-ex-08";
+    }
 }
