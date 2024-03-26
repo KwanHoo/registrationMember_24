@@ -1,6 +1,8 @@
 package com.moriah.registrationMember.ajaxEx.controller;
 
 import com.moriah.registrationMember.ajaxEx.controller.dto.AjaxDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,5 +74,21 @@ public class AjaxController {
         dtoList.add(ajaxDto);
 
         return dtoList;
+    }
+
+
+    @PostMapping("/ex09")
+    public ResponseEntity ex09(@RequestBody AjaxDto ajaxDto){
+        System.out.println("ajaxDto = " + ajaxDto);
+
+        return new ResponseEntity<>(ajaxDto, HttpStatus.OK); // responseEntity를 선언함 / HTTPstatus 줄수 있음
+    }
+    @PostMapping("/ex10")
+    public ResponseEntity ex10(@RequestBody AjaxDto ajaxDto){
+        System.out.println("ajaxDto = " + ajaxDto);
+        List<AjaxDto> dtoList = DTOList();
+        dtoList.add(ajaxDto);
+
+        return new ResponseEntity<>(dtoList, HttpStatus.OK); // 리스트객체를 담아서 리턴
     }
 }
