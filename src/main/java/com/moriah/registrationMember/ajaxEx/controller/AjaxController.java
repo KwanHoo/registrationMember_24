@@ -45,4 +45,12 @@ public class AjaxController {
 
         return ajaxDto;
     }
+
+    // @RequestBody 이용해서 JSON타입으로 넘겨받기
+    @PostMapping("/ex07")
+    public @ResponseBody AjaxDto ex07(@RequestBody AjaxDto ajaxDto){
+        System.out.println("ajaxDto = " + ajaxDto);
+
+        return ajaxDto;
+    }
 }
