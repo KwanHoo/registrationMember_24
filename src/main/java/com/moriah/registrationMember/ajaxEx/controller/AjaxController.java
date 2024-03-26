@@ -1,10 +1,8 @@
 package com.moriah.registrationMember.ajaxEx.controller;
 
+import com.moriah.registrationMember.ajaxEx.controller.dto.AjaxDto;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AjaxController {
@@ -32,5 +30,19 @@ public class AjaxController {
         System.out.println("param1 = " + param1 + ", param2 = " + param2);
 
         return "ex04 메서드 호출 완료";
+    }
+
+    @GetMapping("/ex05")
+    public @ResponseBody AjaxDto ex05(@ModelAttribute AjaxDto ajaxDto){
+        System.out.println("ajaxDto = " + ajaxDto);
+
+        return ajaxDto;
+    }
+
+    @PostMapping("/ex06")
+    public @ResponseBody AjaxDto ex06(@ModelAttribute AjaxDto ajaxDto){
+        System.out.println("ajaxDto = " + ajaxDto);
+
+        return ajaxDto;
     }
 }
